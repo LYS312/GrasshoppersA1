@@ -1,6 +1,6 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 from App.database import db
-
+#test push
 class Staff(db.Model):
     staffID = db.Column(db.Integer, primary_key=True)
     username =  db.Column(db.String, nullable=False)
