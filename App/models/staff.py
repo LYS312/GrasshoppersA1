@@ -1,10 +1,12 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 from App.database import db
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+class Staff(db.Model):
+    staffID = db.Column(db.Integer, primary_key=True)
     username =  db.Column(db.String, nullable=False)
     password = db.Column(db.String(120), nullable=False)
+    faculty= db.Column(db.String(120), nullable=False)
+    department= db.Column(db.String(120), nullable=False)
 
     def __init__(self, username, password):
         self.username = username
