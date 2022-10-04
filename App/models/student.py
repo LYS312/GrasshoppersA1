@@ -5,11 +5,11 @@ class Student (db.Model):
     name = db.Column (db.String(120), nullable=False)
     reviews= db.relationship('Review', backref='student', lazy=True, cascade="all, delete-orphan")
 
-    def toDict(self):
+    def toJSON(self):
         return{
-            "studentID":self.studentID,
-            "name":self.name,
-            "reviews":self.reviews
+            'studentID':self.studentID,
+            'name':self.name,
+            'reviews':self.reviews
         }
     
     def getScore (self):

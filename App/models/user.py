@@ -1,8 +1,8 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 from App.database import db
 
-class Staff(db.Model):
-    staffID = db.Column (db.Integer, primary_key=True)
+class User(db.Model):
+    id = db.Column (db.Integer, primary_key=True)
     username =  db.Column(db.String, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     faculty= db.Column(db.String(120), nullable=False)
@@ -12,12 +12,12 @@ class Staff(db.Model):
         self.username = username
         self.set_password(password)
 
-    def toDict(self):
+    def toJSON(self):
         return{
-            "staffID": self.staffID,
-            "username": self.username,
-            "faculty": self.faculty,
-            "department": self.department
+            'id': self.id,
+            'username': self.username,
+            'faculty': self.faculty,
+            'department': self.department
         }
 
     def set_password(self, password):

@@ -6,7 +6,7 @@ class Review (db.Model):
     upvotes = db.Column (db.Integer, default=0, nullable=False)
     downvotes = db.Column (db.Integer, default=0, nullable=False)
     studentID= db.Column(db.Integer, db.ForeignKey('student.studentID'), nullable=False)
-    staffID= db.Column(db.Integer, db.ForeignKey('staff.staffID'), nullable=False)
+    staffID= db.Column(db.Integer, db.ForeignKey('staff.id'), nullable=False)
 
     def toDict (self):
         return{

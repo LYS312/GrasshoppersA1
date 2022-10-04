@@ -1,8 +1,8 @@
 from App.models import User
 from App.database import db
 
-def create_user(username, password):
-    newuser = User(username=username, password=password)
+def create_user(username, password, faculty, department):
+    newuser = User(username=username, password=password, faculty=faculty, department=department)
     db.session.add(newuser)
     db.session.commit()
     return newuser
@@ -23,11 +23,18 @@ def get_all_users_json():
     users = [user.toJSON() for user in users]
     return users
 
-def update_user(id, username):
+def update_user(id, username, faculty, department):
     user = get_user(id)
     if user:
         user.username = username
+        user.faculty=faculty
+        user.department=department
         db.session.add(user)
         return db.session.commit()
     return None
-    
+
+def delete_user(id):
+    user= User.query.get(id)
+    db.session.delete(user)
+    res = db.session.commit()
+    return json.dumps(res)
