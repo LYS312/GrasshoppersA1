@@ -9,7 +9,8 @@ class Student (db.Model):
         return{
             'studentID':self.studentID,
             'name':self.name,
-            'reviews':self.reviews
+            'reviews':self.reviews,
+            'karma_score':self.getScore()
         }
     
     def getScore (self):
