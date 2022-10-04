@@ -24,13 +24,13 @@ LOGGER = logging.getLogger(__name__)
 class UserUnitTests(unittest.TestCase):
 
     def test_new_user(self):
-        user = User("bob", "bobpass")
+        user = User("bob", "bobpass", "FST", "DCIT")
         assert user.username == "bob"
 
     def test_toJSON(self):
-        user = User("bob", "bobpass")
+        user = User("bob", "bobpass", "FST", "DCIT")
         user_json = user.toJSON()
-        self.assertDictEqual(user_json, {"id":None, "username":"bob"})
+        self.assertDictEqual(user_json, {"id":None, "username":"bob", "faculty":"FST", "department":"DCIT"})
     
     def test_hashed_password(self):
         password = "mypass"
@@ -64,14 +64,14 @@ def test_authenticate():
 class UsersIntegrationTests(unittest.TestCase):
 
     def test_create_user(self):
-        user = create_user("rick", "bobpass")
+        user = create_user("rick", "bobpass", "FSS", "DOE")
         assert user.username == "rick"
 
     def test_get_all_users_json(self):
         users_json = get_all_users_json()
-        self.assertListEqual([{"id":1, "username":"bob"}, {"id":2, "username":"rick"}], users_json)
+        self.assertListEqual([{"id":1, "username":"bob", "faculty":"FST", "department":"DCIT"}, {"id":2, "username":"rick", "faculty":"FSS", "department":"DOE"}], users_json)
 
     def test_update_user(self):
-        update_user(1, "ronnie")
+        update_user(1, "ronnie", "FST", "DCIT")
         user = get_user(1)
         assert user.username == "ronnie"
