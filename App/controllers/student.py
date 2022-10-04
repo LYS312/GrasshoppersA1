@@ -11,4 +11,11 @@ def delete_student(studentID):
     db.session.delete(student)
     db.session.commit()
 
+def update_student(studentID, name):
+    student=Student.query.get(studentID)
+    student.name=name
+    db.session.add(student)
+    db.session.commit()
+
+
 
