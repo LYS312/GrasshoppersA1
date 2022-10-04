@@ -11,7 +11,7 @@ class Review (db.Model):
     studentID= db.Column(db.Integer, db.ForeignKey('student.studentID'), nullable=False)
     staffID= db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    def toDict (self):
+    def toJSON (self):
         return{
             'reviewID': self.reviewID,
             'experience':self.experience,

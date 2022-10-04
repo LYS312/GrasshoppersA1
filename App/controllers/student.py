@@ -17,5 +17,21 @@ def update_student(studentID, name):
     db.session.add(student)
     db.session.commit()
 
+def get_student(studentID):
+    return Student.query.get(studentID)
+
+def get_all_students():
+    return Student.query.all()
+
+def get_all_students_JSON():
+    students=get_all_students()
+    if not students:
+        return []
+    students = [student.toJSON() for student in students]
+    return students
+
+
+
+
 
 
