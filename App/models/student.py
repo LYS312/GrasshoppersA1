@@ -15,7 +15,12 @@ class Student (db.Model):
     def getScore (self):
         score=100
         for review in self.reviews:
-            score= score + review.upvotes - review.downvotes
+            if (review.rating>5):
+                score= score + review.rating + (review.rating-5)*review.upvotes - review.downvotes
+            elif (review.rating<5):
+                score= score - (10 - review.rating) - (5-review.rating)*review.upvotes + review.downvotes
+            else (review==5):
+                score=score + review.rating + review.upvotes - review.downvotes
         return score
             
 
