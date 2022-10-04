@@ -11,6 +11,9 @@ def delete_review(reviewID):
     db.session.delete(review)
     db.session.commit()
 
+def get_review(reviewID):
+    return Review.query.get(reviewID)
+
 def get_all_reviews():
     return Review.query.all()
 
@@ -34,6 +37,37 @@ def get_reviews_by_staff_JSON(staffID):
         return []
     reviews = [review.toDict() for review in reviews]
     return reviews 
+
+def update_review(reviewID, experience, rating):
+    review= get_review(reviewID)
+    review.experience=experience
+    review.rating=rating
+    db.session.add(review)
+    db.session.commit()
+
+def upvote(reviewID):
+    review=get_review(reviewID)
+    review.upvotes= review.upvotes+1
+    db.session.add(review)
+    db.session.commit()
+
+def remove_upvote(reviewID):
+    review=get_review(reviewID)
+    review.upvotes= review.upvotes-1
+    db.session.add(review)
+    db.session.commit()
+
+def downvote(reviewID):
+    review=get_review(reviewID)
+    review.downvotes= review.downvotes +1
+    db.session.add(review)
+    db.session.commit()
+
+def remove_downvote(reviewID):
+    review=get_review(reviewID)
+    review.downvotes= review.downvotes -1
+    db.session.add(review)
+    db.session.commit()
 
 
 
