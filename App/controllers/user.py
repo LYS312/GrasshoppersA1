@@ -36,5 +36,4 @@ def update_user(id, username, faculty, department):
 def delete_user(id):
     user= User.query.get(id)
     db.session.delete(user)
-    res = db.session.commit()
-    return json.dumps(res)
+    db.session.commit()
