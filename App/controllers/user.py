@@ -30,7 +30,7 @@ def update_user(id, username, faculty, department):
         user.faculty=faculty
         user.department=department
         db.session.add(user)
-        return db.session.commit()
+        db.session.commit()
     return None
 
 def delete_user(id):

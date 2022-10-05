@@ -8,9 +8,11 @@ class User(db.Model):
     faculty= db.Column(db.String(120), nullable=False)
     department= db.Column(db.String(120), nullable=False)
 
-    def __init__(self, username, password):
+    def __init__(self, username, password, faculty, department):
         self.username = username
         self.set_password(password)
+        self.faculty=faculty
+        self.department=department
 
     def toJSON(self):
         return{
