@@ -61,8 +61,9 @@ def update_user_command(id, username, faculty, department):
     update_user(id, username, faculty, department)
     print(f'{username} updated!')
 
-
 app.cli.add_command(user_cli) # add the group to the cli
+
+reveiw_cli = AppGroup('review', help='Review object commands') 
 
 
 
