@@ -58,8 +58,8 @@ def empty_db():
 
 
 def test_authenticate():
-    user = create_user("bob", "bobpass")
-    assert authenticate("bob", "bobpass") != None
+    user = create_user("bob", "bobpass", "FST", "DCIT")
+    assert authenticate("bob", "bobpass", "FST", "DCIT") != None
 
 class UsersIntegrationTests(unittest.TestCase):
 
