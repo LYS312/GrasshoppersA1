@@ -11,16 +11,16 @@ from App.controllers import (
 student_views = Blueprint('student_views', __name__, template_folder='../templates')
 
 
-@user_views.route('/students', methods=['GET'])
+@student_views.route('/students', methods=['GET'])
 def get_student_page():
     students = get_all_students()
     return render_template('users.html', students=students)
 
-@user_views.route('/api/students')
+@student_views.route('/api/students')
 def client_app():
-    students = get_all_students_json()
+    students = get_all_students_JSON()
     return jsonify(students)
 
-@user_views.route('/static/students')
+@student_views.route('/static/students')
 def static_student_page():
   return send_from_directory('static', 'static-student.html')
