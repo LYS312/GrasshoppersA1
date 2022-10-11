@@ -8,7 +8,10 @@ from App.controllers import (
     create_user, 
     get_all_users_json, 
     get_all_users, 
-    update_user 
+    update_user,
+    create_student, 
+    get_all_students,
+    get_all_students_JSON
     )
 
 # This commands file allow you to create convenient CLI commands for testing controllers
@@ -42,7 +45,17 @@ def create_user_command(username, password, faculty, department):
     create_user(username, password, faculty, department)
     print(f'{username} created!')
 
-# this command will be : flask user create bob bobpass
+# this command will be : flask user create rob robpass FST DCIT
+
+
+student_cli = AppGroup('student', help="Student object commands")
+
+@student_cli.command("create", help="Create a student")
+@click.argument("name", default="tom")
+def create_student_command(name):
+    create_student(name)
+    print(f'{name} created!')
+
 
 @user_cli.command("list", help="Lists users in the database")
 @click.argument("format", default="string")
@@ -62,7 +75,7 @@ def update_user_command(id, username, faculty, department):
     print(f'{username} updated!')
 
 app.cli.add_command(user_cli) # add the group to the cli
-
+app.cli.add_command(student_cli)
 reveiw_cli = AppGroup('review', help='Review object commands') 
 
 

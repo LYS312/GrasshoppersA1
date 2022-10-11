@@ -2,8 +2,8 @@ from App.models import Student
 from App.database import db
 
 def create_student(name):
-    newStudent= Student(student=student)
-    db.session.add(student)
+    newStudent= Student(name=name)
+    db.session.add(newStudent)
     db.session.commit()
 
 def delete_student(studentID):
