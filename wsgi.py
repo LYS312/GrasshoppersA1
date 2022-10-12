@@ -8,7 +8,14 @@ from App.controllers import (
     create_user, 
     get_all_users_json, 
     get_all_users, 
-    update_user 
+    update_user,
+    create_student, 
+    get_all_students,
+    get_all_students_JSON,
+    update_student,
+    create_review, 
+    get_all_reviews,
+    get_all_reviews_JSON,
     )
 
 # This commands file allow you to create convenient CLI commands for testing controllers
@@ -25,14 +32,9 @@ def initialize():
 '''
 User Commands
 '''
-
-# Commands can be organized using groups
-
-# create a group, it would be the first argument of the comand
-# eg : flask user <command>
+#USER COMMANDS
+#create user : flask user create rob robpass FST DCIT
 user_cli = AppGroup('user', help='User object commands') 
-
-# Then define the command and any parameters and annotate it with the group (@)
 @user_cli.command("create", help="Creates a user")
 @click.argument("username", default="rob")
 @click.argument("password", default="robpass")
@@ -42,7 +44,49 @@ def create_user_command(username, password, faculty, department):
     create_user(username, password, faculty, department)
     print(f'{username} created!')
 
-# this command will be : flask user create bob bobpass
+@user_cli.command("update", help="Updates a user")
+@click.argument("id", default="1")
+@click.argument("username", default="rob")
+@click.argument("faculty", default="FHE")
+@click.argument("department", default="LOL")
+def update_user_command(id, username, faculty, department):
+    update_user(id, username, faculty, department)
+    print(f'{username} updated!')
+
+#STUDENT COMMANDS
+#create student : flask student create tom
+student_cli = AppGroup('student', help="Student object commands")
+@student_cli.command("create", help="Create a student")
+@click.argument("name", default="tom")
+def create_student_command(name):
+    create_student(name)
+    print(f'{name} created!')
+
+#update student : flask student update 1 tommy
+@student_cli.command("update", help="Create a student")
+@click.argument("studentid", default="1")
+@click.argument("name", default="tom")
+def update_student_command(studentid, name):
+    student = update_student(studentid, name)
+    if student:
+        print(f'{name} updated!')
+    else:
+        print(f'{name} not updated!')
+
+
+#REVIEW COMMANDS
+#create review: flask review create 1 1 good 5
+review_cli = AppGroup('review', help="Review object commands")
+@review_cli.command("create", help="Create a review")
+@click.argument("studentid", default="1")
+@click.argument("staffid", default="1")
+@click.argument("experience", default="good")
+@click.argument("rating", default="5")
+def create_review_command(studentid, staffid, experience, rating):
+    create_review(studentid, staffid, experience, rating)
+    print(f'review created!')
+
+
 
 @user_cli.command("list", help="Lists users in the database")
 @click.argument("format", default="string")
@@ -52,20 +96,10 @@ def list_user_command(format):
     else:
         print(get_all_users_json())
 
-@user_cli.command("update", help="Updates info on staff member")
-@click.argument("id", default="1")
-@click.argument("username", default="rob")
-@click.argument("faculty", default="FSS")
-@click.argument("department", default="DPS")
-def update_user_command(id, username, faculty, department):
-    update_user(id, username, faculty, department)
-    print(f'{username} updated!')
 
 app.cli.add_command(user_cli) # add the group to the cli
-
-reveiw_cli = AppGroup('review', help='Review object commands') 
-
-
+app.cli.add_command(student_cli)
+app.cli.add_command(review_cli)
 
 
 '''

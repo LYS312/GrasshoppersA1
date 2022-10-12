@@ -5,6 +5,10 @@ class Student (db.Model):
     name = db.Column (db.String(120), nullable=False)
     reviews= db.relationship('Review', backref='student', lazy=True, cascade="all, delete-orphan")
 
+    def __init__(self, name):
+        self.name = name
+    
+
     def toJSON(self):
         return{
             'studentID':self.studentID,

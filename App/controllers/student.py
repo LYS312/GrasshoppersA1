@@ -2,8 +2,8 @@ from App.models import Student
 from App.database import db
 
 def create_student(name):
-    newStudent= Student(student=student)
-    db.session.add(student)
+    newStudent= Student(name=name)
+    db.session.add(newStudent)
     db.session.commit()
 
 def delete_student(studentID):
@@ -12,10 +12,12 @@ def delete_student(studentID):
     db.session.commit()
 
 def update_student(studentID, name):
-    student=Student.query.get(studentID)
-    student.name=name
-    db.session.add(student)
-    db.session.commit()
+    student=Student.query.filter_by(studentID=studentID).first()
+    if student:
+        student.name=name
+        db.session.add(student)
+        db.session.commit()
+    return student
 
 def get_student(studentID):
     return Student.query.get(studentID)
