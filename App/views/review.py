@@ -4,6 +4,7 @@ from flask_jwt import jwt_required
 
 from App.controllers import (
     create_review, 
+    update_review,
     get_all_reviews,
     get_all_reviews_JSON
 )
@@ -24,3 +25,13 @@ def client_app():
 @review_views.route('/static/reviews')
 def static_reviews_page():
   return send_from_directory('static', 'static-review.html')
+
+@review_views.route('/api/newreview/<studentid>/<staffid>/<experience>/<rating>', methods=['GET'])
+def new_review(studentid, staffid, experience, rating):
+    create_review(studentid, staffid, experience, rating)
+    return jsonify({"message":"Review Created"})
+
+@review_views.route('/api/updatereview/<reviewid>/<experience>/<rating>', methods=['UPDATE'])
+def update_review_info(reviewid, experience, rating):
+    update_review(reviewid, experience, rating)
+    return jsonify({"message":"Review Updated"})
