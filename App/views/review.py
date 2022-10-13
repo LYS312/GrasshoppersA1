@@ -5,6 +5,7 @@ from flask_jwt import jwt_required
 from App.controllers import (
     create_review, 
     update_review,
+    delete_review,
     get_all_reviews,
     get_all_reviews_JSON
 )
@@ -35,3 +36,11 @@ def new_review(studentid, staffid, experience, rating):
 def update_review_info(reviewid, experience, rating):
     update_review(reviewid, experience, rating)
     return jsonify({"message":"Review Updated"})
+
+@review_views.route('/api/deletereview/<reviewid>', methods=['GET'])
+def delete_review_info(reviewid):
+    delete = delete_review(reviewid)
+    if delete:
+        return jsonify({"message":"Review Deleted"})
+    else:
+        return jsonify({"message":"Review not found"})

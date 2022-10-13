@@ -1,5 +1,6 @@
 from App.models import Student
 from App.database import db
+import json
 
 def create_student(name):
     newStudent= Student(name=name)
@@ -20,7 +21,7 @@ def update_student(studentID, name):
     return student
 
 def get_student(studentID):
-    return Student.query.get(studentID)
+    return Student.query.filter_by(studentID=studentID).first()
 
 def get_all_students():
     return Student.query.all()

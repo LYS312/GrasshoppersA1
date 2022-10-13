@@ -5,6 +5,7 @@ from flask_jwt import jwt_required
 from App.controllers import (
     create_user, 
     update_user,
+    delete_user,
     get_all_users,
     get_all_users_json,
 )
@@ -35,3 +36,8 @@ def new_user(username, password, faculty, department):
 def update_user_info(id, username, faculty, department):
     update_user(id, username, faculty, department)
     return jsonify({"message":"User Updated"})
+
+@user_views.route('/api/deleteuser/<userid>')
+def delete_user_info(userid):
+    delete_user(userid)
+    return jsonify({"message":"User Deleted"})

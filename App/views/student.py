@@ -1,10 +1,12 @@
 from flask import Blueprint, render_template, jsonify, request, send_from_directory
 from flask_jwt import jwt_required
-
+#import json
 
 from App.controllers import (
     create_student, 
     update_student,
+    delete_student,
+    get_student,
     get_all_students,
     get_all_students_JSON
 )
@@ -33,5 +35,16 @@ def new_student(name):
 
 @student_views.route('/api/updatestudent/<studentid>/<name>', methods=['UPDATE'])
 def update_student_info(studentid, name):
-    update_student(studentid, name)
-    return jsonify({"message":"Student Updated"})
+    update_student(studentid)
+    return jsonify({"message":"Student Deleted"})
+
+@student_views.route('/api/deletestudent/<studentid>', methods=['GET'])
+def delete_student_info(studentid):
+    delete_student(studentid)
+    return jsonify({"message":"Student deleted"})
+
+@student_views.route('/api/<studentid>')
+def get_student_info(studentid):
+    student = get_student(studentid)
+    student = student.toJSON()
+    return student

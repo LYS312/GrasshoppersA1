@@ -9,6 +9,7 @@ class Review (db.Model):
     downvotes = db.Column (db.Integer, default=0, nullable=False)
     created_on = db.Column(db.DateTime(), default=datetime.utcnow, nullable=False)
     studentID = db.Column(db.Integer, db.ForeignKey('student.studentID'), nullable=False)
+    #student = db.relationship("Student",back_populates="reviews")
     staffID= db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __init__(self, experience, rating, studentID, staffID):
