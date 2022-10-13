@@ -27,15 +27,20 @@ def client_app():
 def static_user_page():
   return send_from_directory('static', 'static-user.html')
 
+
 @user_views.route('/user', methods=['POST'])
 def new_user():
     data=request.get_json()
-    create_user(data["username"], data["password"], data["faculty"], data["department"])
-    return jsonify({"message":"User Created"})
+    newuser=create_user(data["username"], data["password"], data["faculty"], data["department"])
+    if newuser:
+        return jsonify({"message":"User Created"})
+    else:
+        return jsonify({"message":"User " + data["username"] + " already exists"})
 
-@user_views.route('/api/updateuser/<id>/<username>/<faculty>/<department>', methods=['UPDATE'])
-def update_user_info(id, username, faculty, department):
-    update_user(id, username, faculty, department)
+@user_views.route('/updateuser/<id>', methods=['PUT'])
+def update_user_info(id):
+    data=request.get_json()
+    update_user(id, data["faculty"], data["department"])
     return jsonify({"message":"User Updated"})
 
 @user_views.route('/api/deleteuser/<userid>')
