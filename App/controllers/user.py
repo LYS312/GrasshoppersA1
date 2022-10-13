@@ -11,9 +11,10 @@ def create_user(username, password, faculty, department):
     old_user = User.query.filter_by(username=username).first()
     if not old_user:
         newuser = User(username=username, password=password, faculty=faculty, department=department)
-    db.session.add(newuser)
-    db.session.commit()
-    return newuser
+        db.session.add(newuser)
+        db.session.commit()
+        return newuser
+    return []
 
 def get_user_by_username(username):
     return User.query.filter_by(username=username).first()
