@@ -18,7 +18,7 @@ def get_student_page():
     students = get_all_students()
     return render_template('users.html', students=students)
 
-@student_views.route('/api/students')
+@student_views.route('/api/students', methods=['GET'])
 def client_app():
     students = get_all_students_JSON()
     return jsonify(students)
@@ -46,7 +46,7 @@ def update_student_info(studentid):
     else:
         return jsonify({"message":"Student not found"})
 
-@student_views.route('/api/deletestudent/<studentid>', methods=['GET'])
+@student_views.route('/deletestudent/<studentid>', methods=['DELETE'])
 def delete_student_info(studentid):
     student=delete_student(studentid)
     if student:
