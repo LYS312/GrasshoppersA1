@@ -29,6 +29,8 @@ def initialize():
     create_db(app)
     print('database intialized')
 
+
+
 '''
 User Commands
 '''
@@ -53,14 +55,18 @@ def update_user_command(id, username, faculty, department):
     update_user(id, username, faculty, department)
     print(f'{username} updated!')
 
+
+
 #STUDENT COMMANDS
 #create student : flask student create tom
 student_cli = AppGroup('student', help="Student object commands")
 @student_cli.command("create", help="Create a student")
+@click.argument("studentid", default="816024001")
 @click.argument("name", default="tom")
-def create_student_command(name):
-    create_student(name)
+def create_student_command(studentid, name):
+    create_student(studentid, name)
     print(f'{name} created!')
+
 
 #update student : flask student update 1 tommy
 @student_cli.command("update", help="Create a student")
@@ -72,6 +78,7 @@ def update_student_command(studentid, name):
         print(f'{name} updated!')
     else:
         print(f'{name} not updated!')
+
 
 
 #REVIEW COMMANDS

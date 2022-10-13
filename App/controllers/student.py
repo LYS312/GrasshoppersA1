@@ -2,8 +2,8 @@ from App.models import Student
 from App.database import db
 import json
 
-def create_student(name):
-    newStudent= Student(name=name)
+def create_student(studentID, name):
+    newStudent= Student(studentID, name=name)
     db.session.add(newStudent)
     db.session.commit()
 

@@ -8,12 +8,16 @@ class Student (db.Model):
 
     #reviews= db.relationship('Review', lazy=True, cascade="all, delete-orphan",back_populates="student")
     #reviews= db.relationship('Review')
-    def __init__(self, name):
+
+
+    def __init__(self, studentID, name):
+        self.studentID = studentID
         self.name = name
     
 
     def toJSON(self):
         reviews = [review.toJSON() for review in self.reviews]
+
         return{
             'studentID':self.studentID,
             'name':self.name,
@@ -21,6 +25,7 @@ class Student (db.Model):
             'karma_score':self.getScore()
         }
     
+
     def getScore (self):
         score=100
         for review in self.reviews:
