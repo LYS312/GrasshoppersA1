@@ -46,7 +46,10 @@ def update_user_info(id):
     else:
         return jsonify({"message":"User not found"})
 
-@user_views.route('/api/deleteuser/<userid>')
-def delete_user_info(userid):
-    delete_user(userid)
-    return jsonify({"message":"User Deleted"})
+@user_views.route('/deleteuser/<id>')
+def delete_user_info(id):
+    user=delete_user(id)
+    if user:
+        return jsonify({"message":"User Deleted"})
+    else:
+        return jsonify({"message":"User not found"})
