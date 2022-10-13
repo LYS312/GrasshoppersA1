@@ -53,7 +53,7 @@ def delete_student_info(studentid):
     else:
         return jsonify({"message":"Student not found"})
 
-@student_views.route('/api/<studentid>')
+@student_views.route('/student/<studentid>')
 def get_student_info(studentid):
     student = get_student(studentid)
     if student:
