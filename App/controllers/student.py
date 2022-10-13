@@ -32,8 +32,9 @@ def get_all_students_JSON():
     students=get_all_students()
     if not students:
         return []
-    students = [student.toJSON() for student in students]
-    return students
+    else:
+        students = [student.toJSON() for student in students]
+        return students
 
 
 
