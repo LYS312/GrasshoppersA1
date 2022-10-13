@@ -27,9 +27,9 @@ def client_app():
 def static_student_page():
   return send_from_directory('static', 'static-student.html')
 
-@student_views.route('/api/newstudent/<name>', methods=['GET'])
-def new_student(name):
-    create_student(name)
+@student_views.route('/api/newstudent/<studentID>/<name>', methods=['GET'])
+def new_student(studentID, name):
+    create_student(studentID, name)
     return jsonify({"message":"Student Created"})
 
 @student_views.route('/api/updatestudent/<studentid>/<name>', methods=['UPDATE'])
