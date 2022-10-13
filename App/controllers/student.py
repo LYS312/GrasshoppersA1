@@ -9,8 +9,10 @@ def create_student(studentID, name):
 
 def delete_student(studentID):
     student=Student.query.get(studentID)
-    db.session.delete(student)
-    db.session.commit()
+    if student:
+        db.session.delete(student)
+        db.session.commit()
+    return student
 
 def update_student(studentID, name):
     student=Student.query.filter_by(studentID=studentID).first()

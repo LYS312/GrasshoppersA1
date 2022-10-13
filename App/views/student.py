@@ -43,8 +43,11 @@ def update_student_info(studentid, name):
 
 @student_views.route('/api/deletestudent/<studentid>', methods=['GET'])
 def delete_student_info(studentid):
-    delete_student(studentid)
-    return jsonify({"message":"Student deleted"})
+    student=delete_student(studentid)
+    if student:
+        return jsonify({"message":"Student deleted"})
+    else:
+        return jsonify({"message":"Student not found"})
 
 @student_views.route('/api/<studentid>')
 def get_student_info(studentid):
