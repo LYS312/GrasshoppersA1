@@ -28,10 +28,14 @@ def static_student_page():
   return send_from_directory('static', 'static-student.html')
 
 
-@student_views.route('/api/newstudent/<studentID>/<name>', methods=['POST'])
-def new_student(studentID, name):
-    create_student(studentID, name)
-    return jsonify({"message":"Student Created"})
+@student_views.route('/student', methods=['POST'])
+def new_student():
+    data=request.get_json()
+    student=create_student(data["studentID"], data["name"])
+    if student:
+        return jsonify({"message":"Student Created"})
+    else:
+        return jsonify({"message":"This student id is already in use"})
 
 @student_views.route('/api/updatestudent/<studentid>/<name>', methods=['GET'])
 def update_student_info(studentid, name):

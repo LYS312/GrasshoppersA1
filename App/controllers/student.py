@@ -3,9 +3,15 @@ from App.database import db
 import json
 
 def create_student(studentID, name):
+    student=Student.query.filter_by(studentID=studentID).first()
+    if student:
+        return None
+    
+    # if student has not already been added
     newStudent= Student(studentID, name=name)
     db.session.add(newStudent)
     db.session.commit()
+    return newStudent
 
 def delete_student(studentID):
     student=Student.query.get(studentID)
