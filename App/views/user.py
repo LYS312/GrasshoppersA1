@@ -40,8 +40,11 @@ def new_user():
 @user_views.route('/updateuser/<id>', methods=['PUT'])
 def update_user_info(id):
     data=request.get_json()
-    update_user(id, data["faculty"], data["department"])
-    return jsonify({"message":"User Updated"})
+    user=update_user(id, data["faculty"], data["department"])
+    if user:
+        return jsonify({"message":"User Updated"})
+    else:
+        return jsonify({"message":"User not found"})
 
 @user_views.route('/api/deleteuser/<userid>')
 def delete_user_info(userid):
