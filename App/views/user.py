@@ -27,9 +27,10 @@ def client_app():
 def static_user_page():
   return send_from_directory('static', 'static-user.html')
 
-@user_views.route('/api/newuser/<username>/<password>/<faculty>/<department>', methods=['GET'])
-def new_user(username, password, faculty, department):
-    create_user(username, password, faculty, department)
+@user_views.route('/user', methods=['POST'])
+def new_user():
+    data=request.get_json()
+    create_user(data["username"], data["password"], data["faculty"], data["department"])
     return jsonify({"message":"User Created"})
 
 @user_views.route('/api/updateuser/<id>/<username>/<faculty>/<department>', methods=['UPDATE'])
