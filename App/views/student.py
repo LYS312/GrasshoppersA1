@@ -28,7 +28,7 @@ def static_student_page():
   return send_from_directory('static', 'static-student.html')
 
 
-@student_views.route('/api/newstudent/<studentID>/<name>', methods=['GET'])
+@student_views.route('/api/newstudent/<studentID>/<name>', methods=['POST'])
 def new_student(studentID, name):
     create_student(studentID, name)
     return jsonify({"message":"Student Created"})
@@ -53,7 +53,7 @@ def delete_student_info(studentid):
 def get_student_info(studentid):
     student = get_student(studentid)
     if student:
-        student = student.toJSON()  # fix NoneType has no attribute toJSON
+        student = student.toJSON()
         return student
     else:
         return jsonify({"message":"Student not found"})
