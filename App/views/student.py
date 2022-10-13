@@ -52,5 +52,8 @@ def delete_student_info(studentid):
 @student_views.route('/api/<studentid>')
 def get_student_info(studentid):
     student = get_student(studentid)
-    student = student.toJSON()  # fix NoneType has no attribute toJSON
-    return student
+    if student:
+        student = student.toJSON()  # fix NoneType has no attribute toJSON
+        return student
+    else:
+        return jsonify({"message":"Student not found"})
