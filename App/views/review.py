@@ -3,7 +3,8 @@ from flask_jwt import jwt_required
 
 from App.controllers import (
     create_review, 
-    update_review,
+    update_review_exp,
+    update_review_rate,
     delete_review,
     get_all_reviews,
     get_all_reviews_JSON
@@ -33,10 +34,23 @@ def new_review():
     create_review(data["studentID"], data["staffID"], data["experience"], data["rating"])
     return jsonify({"message":"Review Created"})
 
-@review_views.route('/api/updatereview/<reviewid>/<experience>/<rating>', methods=['UPDATE'])
-def update_review_info(reviewid, experience, rating):
-    update_review(reviewid, experience, rating)
-    return jsonify({"message":"Review Updated"})
+@review_views.route('/updatereview/experience/<reviewid>', methods=['PUT'])
+def update_review_experience(reviewid):
+    data=request.get_json()
+    review=update_review_exp(reviewid, data["experience"])
+    if review:
+        return jsonify({"message":"Review Updated"})
+    else:
+        return jsonify({"message":"Review not found"})
+
+@review_views.route('/updatereview/rating/<reviewid>', methods=['PUT'])
+def update_review_rating(reviewid):
+    data=request.get_json()
+    review=update_review_rate(reviewid, data["rating"])
+    if review:
+        return jsonify({"message":"Review Updated"})
+    else:
+        return jsonify({"message":"Review not found"})
 
 @review_views.route('/api/deletereview/<reviewid>', methods=['GET'])
 def delete_review_info(reviewid):
