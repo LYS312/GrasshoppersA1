@@ -37,9 +37,10 @@ def new_student():
     else:
         return jsonify({"message":"This student id is already in use"})
 
-@student_views.route('/api/updatestudent/<studentid>/<name>', methods=['GET'])
-def update_student_info(studentid, name):
-    student=update_student(studentid, name)
+@student_views.route('/updatestudent/<studentid>', methods=['PUT'])
+def update_student_info(studentid):
+    data=request.get_json()
+    student=update_student(studentid, data["name"])
     if student:
         return jsonify({"message":"Student updated"})
     else:
