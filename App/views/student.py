@@ -27,15 +27,19 @@ def client_app():
 def static_student_page():
   return send_from_directory('static', 'static-student.html')
 
+
 @student_views.route('/api/newstudent/<studentID>/<name>', methods=['GET'])
 def new_student(studentID, name):
     create_student(studentID, name)
     return jsonify({"message":"Student Created"})
 
-@student_views.route('/api/updatestudent/<studentid>/<name>', methods=['UPDATE'])
+@student_views.route('/api/updatestudent/<studentid>/<name>', methods=['GET'])
 def update_student_info(studentid, name):
-    update_student(studentid)
-    return jsonify({"message":"Student Deleted"})
+    student=update_student(studentid, name)
+    if student:
+        return jsonify({"message":"Student updated"})
+    else:
+        return jsonify({"message":"Student not found"})
 
 @student_views.route('/api/deletestudent/<studentid>', methods=['GET'])
 def delete_student_info(studentid):
@@ -45,5 +49,5 @@ def delete_student_info(studentid):
 @student_views.route('/api/<studentid>')
 def get_student_info(studentid):
     student = get_student(studentid)
-    student = student.toJSON()
+    student = student.toJSON()  # fix NoneType has no attribute toJSON
     return student
