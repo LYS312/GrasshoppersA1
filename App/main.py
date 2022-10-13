@@ -6,8 +6,6 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from datetime import timedelta
-
-
 from App.database import create_db
 
 from App.controllers import (
@@ -22,13 +20,13 @@ from App.views import (
 )
 
 # New views must be imported and added to this list
-
 views = [
     user_views,
     student_views,
     review_views,
     index_views
 ]
+
 
 def add_views(app, views):
     for view in views:
@@ -52,6 +50,7 @@ def loadConfig(app, config):
         
     for key, value in config.items():
         app.config[key] = config[key]
+
 
 def create_app(config={}):
     app = Flask(__name__, static_url_path='/static')
