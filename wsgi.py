@@ -55,7 +55,13 @@ def update_user_command(id, username, faculty, department):
     update_user(id, username, faculty, department)
     print(f'{username} updated!')
 
-
+@user_cli.command("list", help="Lists users in the database")
+@click.argument("format", default="string")
+def list_user_command(format):
+    if format == 'string':
+        print(get_all_users())
+    else:
+        print(get_all_users_json())
 
 #STUDENT COMMANDS
 #create student : flask student create tom
@@ -94,14 +100,6 @@ def create_review_command(studentid, staffid, experience, rating):
     print(f'review created!')
 
 
-
-@user_cli.command("list", help="Lists users in the database")
-@click.argument("format", default="string")
-def list_user_command(format):
-    if format == 'string':
-        print(get_all_users())
-    else:
-        print(get_all_users_json())
 
 
 app.cli.add_command(user_cli) # add the group to the cli

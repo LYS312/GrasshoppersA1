@@ -8,6 +8,10 @@ from App.controllers import (
     delete_review,
     get_all_reviews,
     get_all_reviews_JSON
+    upvote,
+    downvote,
+    remove_downvote,
+    remove_upvote
 )
 
 review_views = Blueprint('review_views', __name__, template_folder='../templates')
@@ -44,3 +48,23 @@ def delete_review_info(reviewid):
         return jsonify({"message":"Review Deleted"})
     else:
         return jsonify({"message":"Review not found"})
+
+@review_views.route('/api/upvotereview/<reviewid>', methods=['UPDATE'])
+def upvote_review(reviewid):
+    upvote(reviewid)
+    return jsonify({"message":"Review Upvoted"})
+
+@review_views.route('/api/downvotereview/<reviewid>', methods=['UPDATE'])
+def downvote_review(reviewid):
+    downvote(reviewid)
+    return jsonify({"message":"Review Downvoted"})
+
+@review_views.route('/api/removeupvote/<reviewid>', methods=['UPDATE'])
+def remove_upvote_view(reviewid):
+    remove_upvote(reviewid)
+    return jsonify({"message":"Upvote Removed"})
+
+@review_views.route('/api/removedownvote/<reviewid>', methods=['UPDATE'])
+def remove_downvote_view(reviewid):
+    remove_downvote(reviewid)
+    return jsonify({"message":"Downvote Removed"})
