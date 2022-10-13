@@ -52,7 +52,7 @@ def update_review_rating(reviewid):
     else:
         return jsonify({"message":"Review not found"})
 
-@review_views.route('/api/deletereview/<reviewid>', methods=['GET'])
+@review_views.route('/deletereview/<reviewid>', methods=['DELETE'])
 def delete_review_info(reviewid):
     delete = delete_review(reviewid)
     if delete:
