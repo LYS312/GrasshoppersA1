@@ -28,6 +28,8 @@ class Student (db.Model):
 
     def getScore (self):
         score=100
+        if not self.reviews:
+            return score
         for review in self.reviews:
             if (review.rating>5):
                 score= score + review.rating + (review.rating-5)*review.upvotes - review.downvotes
