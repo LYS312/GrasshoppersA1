@@ -7,7 +7,11 @@ from App.controllers import (
     update_review_rate,
     delete_review,
     get_all_reviews,
-    get_all_reviews_JSON
+    get_all_reviews_JSON,
+    upvote,
+    remove_upvote,
+    downvote,
+    remove_downvote
 )
 
 review_views = Blueprint('review_views', __name__, template_folder='../templates')
