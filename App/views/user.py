@@ -28,8 +28,8 @@ def static_user_page():
   return send_from_directory('static', 'static-user.html')
 
 
-@user_views.route('/user', methods=['POST'])
-def new_user():
+@user_views.route('/signup', methods=['POST'])
+def signup():
     data=request.get_json()
     newuser=create_user(data["username"], data["password"], data["faculty"], data["department"])
     if newuser:
