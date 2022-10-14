@@ -58,27 +58,35 @@ def update_review_rate(reviewID, rating):
 
 def upvote(reviewID):
     review=get_review(reviewID)
-    review.upvotes= review.upvotes+1
-    db.session.add(review)
-    db.session.commit()
+    if review:
+        review.upvotes= review.upvotes+1
+        db.session.add(review)
+        db.session.commit()
+    return review
 
 def remove_upvote(reviewID):
     review=get_review(reviewID)
-    review.upvotes= review.upvotes-1
-    db.session.add(review)
-    db.session.commit()
+    if review:
+        review.upvotes= review.upvotes-1
+        db.session.add(review)
+        db.session.commit()
+    return review
 
 def downvote(reviewID):
     review=get_review(reviewID)
-    review.downvotes= review.downvotes +1
-    db.session.add(review)
-    db.session.commit()
+    if review:
+        review.downvotes= review.downvotes +1
+        db.session.add(review)
+        db.session.commit()
+    return review
 
 def remove_downvote(reviewID):
     review=get_review(reviewID)
-    review.downvotes= review.downvotes -1
-    db.session.add(review)
-    db.session.commit()
+    if review:
+        review.downvotes= review.downvotes -1
+        db.session.add(review)
+        db.session.commit()
+    return review
 
 
 

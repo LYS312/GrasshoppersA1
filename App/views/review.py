@@ -63,3 +63,35 @@ def delete_review_info(reviewid):
         return jsonify({"message":"Review Deleted"})
     else:
         return jsonify({"message":"Review not found"})
+
+@review_views.route('/upvote/<reviewid>', methods=['PUT'])
+def upvote_review(reviewid):
+    review=upvote(reviewid)
+    if review:
+        return jsonify({"message":"Review Upvoted"})
+    else:
+        return jsonify({"message":"Review not found"})
+
+@review_views.route('/downvote/<reviewid>', methods=['PUT'])
+def downvote_review(reviewid):
+    review=downvote(reviewid)
+    if review:
+        return jsonify({"message":"Review Downvoted"})
+    else:
+        return jsonify({"message":"Review not found"})
+
+@review_views.route('/removeupvote/<reviewid>', methods=['PUT'])
+def remove_upvote_view(reviewid):
+    review=remove_upvote(reviewid)
+    if review:
+        return jsonify({"message":"Upvote Removed"})
+    else:
+        return jsonify({"message":"Review not found"})
+
+@review_views.route('/removedownvote/<reviewid>', methods=['PUT'])
+def remove_downvote_view(reviewid):
+    review=remove_downvote(reviewid)
+    if review:
+        return jsonify({"message":"Downvote Removed"})
+    else:
+        return jsonify({"message":"Review not found"})
