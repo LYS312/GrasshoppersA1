@@ -38,6 +38,7 @@ def new_student():
         return jsonify({"message":"This student id is already in use"})
 
 @student_views.route('/updatestudent/<studentid>', methods=['PUT'])
+@jwt_required()
 def update_student_info(studentid):
     data=request.get_json()
     student=update_student(studentid, data["name"])
@@ -47,6 +48,7 @@ def update_student_info(studentid):
         return jsonify({"message":"Student not found"})
 
 @student_views.route('/deletestudent/<studentid>', methods=['DELETE'])
+@jwt_required()
 def delete_student_info(studentid):
     student=delete_student(studentid)
     if student:

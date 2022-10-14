@@ -29,12 +29,14 @@ def static_reviews_page():
 
 
 @review_views.route('/review', methods=['POST'])
+@jwt_required()
 def new_review():
     data=request.get_json()
     create_review(data["studentID"], data["staffID"], data["experience"], data["rating"])
     return jsonify({"message":"Review Created"})
 
 @review_views.route('/updatereview/experience/<reviewid>', methods=['PUT'])
+@jwt_required()
 def update_review_experience(reviewid):
     data=request.get_json()
     review=update_review_exp(reviewid, data["experience"])
@@ -44,6 +46,7 @@ def update_review_experience(reviewid):
         return jsonify({"message":"Review not found"})
 
 @review_views.route('/updatereview/rating/<reviewid>', methods=['PUT'])
+@jwt_required()
 def update_review_rating(reviewid):
     data=request.get_json()
     review=update_review_rate(reviewid, data["rating"])
@@ -53,6 +56,7 @@ def update_review_rating(reviewid):
         return jsonify({"message":"Review not found"})
 
 @review_views.route('/deletereview/<reviewid>', methods=['DELETE'])
+@jwt_required()
 def delete_review_info(reviewid):
     delete = delete_review(reviewid)
     if delete:

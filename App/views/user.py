@@ -38,6 +38,7 @@ def new_user():
         return jsonify({"message":"User " + data["username"] + " already exists"})
 
 @user_views.route('/updateuser/<id>', methods=['PUT'])
+@jwt_required()
 def update_user_info(id):
     data=request.get_json()
     user=update_user(id, data["faculty"], data["department"])
@@ -47,6 +48,7 @@ def update_user_info(id):
         return jsonify({"message":"User not found"})
 
 @user_views.route('/deleteuser/<id>')
+@jwt_required()
 def delete_user_info(id):
     user=delete_user(id)
     if user:
