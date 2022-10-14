@@ -57,7 +57,7 @@ def delete_student_info(studentid):
         return jsonify({"message":"Student not found"})
 
 @student_views.route('/student/<studentid>')
-def get_student_info(studentid):
+def search_student(studentid):
     student = get_student(studentid)
     if student:
         student = student.toJSON()
