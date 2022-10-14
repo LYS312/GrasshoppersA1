@@ -65,6 +65,7 @@ def delete_review_info(reviewid):
         return jsonify({"message":"Review not found"})
 
 @review_views.route('/upvote/<reviewid>', methods=['PUT'])
+@jwt_required()
 def upvote_review(reviewid):
     review=upvote(reviewid)
     if review:
@@ -73,6 +74,7 @@ def upvote_review(reviewid):
         return jsonify({"message":"Review not found"})
 
 @review_views.route('/downvote/<reviewid>', methods=['PUT'])
+@jwt_required()
 def downvote_review(reviewid):
     review=downvote(reviewid)
     if review:
@@ -81,6 +83,7 @@ def downvote_review(reviewid):
         return jsonify({"message":"Review not found"})
 
 @review_views.route('/removeupvote/<reviewid>', methods=['PUT'])
+@jwt_required()
 def remove_upvote_view(reviewid):
     review=remove_upvote(reviewid)
     if review:
@@ -89,6 +92,7 @@ def remove_upvote_view(reviewid):
         return jsonify({"message":"Review not found"})
 
 @review_views.route('/removedownvote/<reviewid>', methods=['PUT'])
+@jwt_required()
 def remove_downvote_view(reviewid):
     review=remove_downvote(reviewid)
     if review:
