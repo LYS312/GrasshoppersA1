@@ -8,11 +8,13 @@ class User(db.Model):
     faculty= db.Column(db.String(120), nullable=False)
     department= db.Column(db.String(120), nullable=False)
 
+
     def __init__(self, username, password, faculty, department):
         self.username = username
         self.set_password(password)
         self.faculty=faculty
         self.department=department
+
 
     def toJSON(self):
         return{
@@ -22,9 +24,11 @@ class User(db.Model):
             'department': self.department
         }
 
+
     def set_password(self, password):
         """Create hashed password."""
         self.password = generate_password_hash(password, method='sha256')
+    
     
     def check_password(self, password):
         """Check hashed password."""

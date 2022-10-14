@@ -7,9 +7,11 @@ def create_review (studentID, staffID, experience, rating):
     db.session.commit()
 
 def delete_review(reviewID):
-    review= Review.query.get(reviewID)
-    db.session.delete(review)
-    db.session.commit()
+    review= Review.query.filter_by(reviewID=reviewID).first()
+    if review:
+        db.session.delete(review)
+        db.session.commit()
+    return review
 
 def get_review(reviewID):
     return Review.query.get(reviewID)
@@ -38,12 +40,21 @@ def get_reviews_by_staff_JSON(staffID):
     reviews = [review.toJSON() for review in reviews]
     return reviews 
 
-def update_review(reviewID, experience, rating):
+def update_review_exp(reviewID, experience):
     review= get_review(reviewID)
-    review.experience=experience
-    review.rating=rating
-    db.session.add(review)
-    db.session.commit()
+    if review:
+        review.experience=experience
+        db.session.add(review)
+        db.session.commit()
+    return review
+
+def update_review_rate(reviewID, rating):
+    review= get_review(reviewID)
+    if review:
+        review.rating=rating
+        db.session.add(review)
+        db.session.commit()
+    return review
 
 def upvote(reviewID):
     review=get_review(reviewID)

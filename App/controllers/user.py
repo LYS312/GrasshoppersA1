@@ -11,9 +11,11 @@ def create_user(username, password, faculty, department):
     old_user = User.query.filter_by(username=username).first()
     if not old_user:
         newuser = User(username=username, password=password, faculty=faculty, department=department)
-    db.session.add(newuser)
-    db.session.commit()
-    return newuser
+        db.session.add(newuser)
+        db.session.commit()
+        return newuser
+    else:
+        return None
 
 def get_user_by_username(username):
     return User.query.filter_by(username=username).first()
@@ -31,16 +33,18 @@ def get_all_users_json():
     users = [user.toJSON() for user in users]
     return users
 
-def update_user(id, username, faculty, department):
+def update_user(id, faculty, department):
     user = get_user(id)
     if user:
-        user.username = username
         user.faculty=faculty
         user.department=department
         db.session.add(user)
         db.session.commit()
+    return user
 
 def delete_user(id):
     user= User.query.get(id)
-    db.session.delete(user)
-    db.session.commit()
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+    return user

@@ -11,6 +11,7 @@ class Review (db.Model):
     studentID = db.Column(db.Integer, db.ForeignKey('student.studentID'), nullable=False)
     staffID= db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
+
     def __init__(self, experience, rating, studentID, staffID):
         self.experience = experience
         self.rating = rating
