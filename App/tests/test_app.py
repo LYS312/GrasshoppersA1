@@ -15,7 +15,8 @@ from App.controllers import (
     get_review,
     update_review_exp,
     update_review_rate,
-    delete_review
+    delete_review,
+    upvote
 )
 
 from wsgi import app
@@ -107,7 +108,6 @@ class UsersIntegrationTests(unittest.TestCase):
         review = get_review(1)
         assert review.rating == 5
 
-
     def test_review_toJSON(self):
         create_review(816024126, 1, "This student was good!", 8)
         review = get_review(1)
@@ -125,3 +125,10 @@ class UsersIntegrationTests(unittest.TestCase):
         review = get_review(1)
         deleted_review = delete_review(1)
         assert review == deleted_review
+
+    def test_review_upvote(self):
+        create_review(816024126, 1, "This student was good!", 8)
+        review = upvote(1)
+        assert review.upvotes == 1
+
+    
