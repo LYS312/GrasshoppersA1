@@ -28,8 +28,8 @@ LOGGER = logging.getLogger(__name__)
 class UserUnitTests(unittest.TestCase):
 
     def test_new_user(self):
-        user = User("bob", "bobpass", "FST", "DCIT")
-        assert user.username == "bob"
+        newuser = User("bob", "bobpass", "FST", "DCIT")
+        assert (newuser.username, newuser.faculty, newuser.department) == ("bob", "FST" , "DCIT")
 
     def test_user_toJSON(self):
         user = User("bob", "bobpass", "FST", "DCIT")
