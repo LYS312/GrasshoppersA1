@@ -12,11 +12,11 @@ class Review (db.Model):
     staffID= db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
-    def __init__(self, experience, rating, studentID, staffID):
-        self.experience = experience
-        self.rating = rating
+    def __init__(self, studentID, staffID, experience, rating):
         self.studentID = studentID
         self.staffID = staffID
+        self.experience = experience
+        self.rating = rating
 
 
     def toJSON (self):
