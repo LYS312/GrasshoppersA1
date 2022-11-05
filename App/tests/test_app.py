@@ -56,7 +56,7 @@ class UserUnitTests(unittest.TestCase):
     
     def test_new_review(self):
         review = Review(816024126, 1, "This student was good!", 8)
-        assert review.studentID == 816024126
+        assert (review.studentID, review.staffID, review.experience, review.rating)== (816024126, 1, "This student was good!", 8)
 
 
 '''
