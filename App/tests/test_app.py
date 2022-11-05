@@ -14,7 +14,8 @@ from App.controllers import (
     create_review,
     get_review,
     update_review_exp,
-    update_review_rate
+    update_review_rate,
+    delete_review
 )
 
 from wsgi import app
@@ -118,3 +119,9 @@ class UsersIntegrationTests(unittest.TestCase):
             "staffID":review_json["staffID"],
         }
         self.assertDictEqual(test_review_json, {"experience":"This student was good!", "rating":8, "studentID":816024126, "staffID":1})
+
+    def test_review_delete(self):
+        create_review(816024126, 1, "This student was good!", 8)
+        review = get_review(1)
+        deleted_review = delete_review(1)
+        assert review == deleted_review
