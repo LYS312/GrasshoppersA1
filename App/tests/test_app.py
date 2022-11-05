@@ -39,21 +39,19 @@ class UserUnitTests(unittest.TestCase):
         user_json = user.toJSON()
         self.assertDictEqual(user_json, {"id":None, "username":"bob", "faculty":"FST", "department":"DCIT"})
     
-#check this one
     def test_hashed_password(self):
         password = "mypass"
         hashed = generate_password_hash(password, method='sha256')
-        faculty = "FST"             #x
-        department = "DCIT"         #x
-        user = User("bob", password, faculty, department)   #faculty and department were not here
+        faculty = "FST"             
+        department = "DCIT"         
+        user = User("bob", password, faculty, department)
         assert user.password != password
 
-#check this one
     def test_check_password(self):
         password = "mypass"
-        faculty = "FST"             #x
-        department = "DCIT"         #x
-        user = User("bob", password, faculty, department)   #faculty and department were not here
+        faculty = "FST"             
+        department = "DCIT"         
+        user = User("bob", password, faculty, department)   
         assert user.check_password(password)
     
     def test_new_review(self):
