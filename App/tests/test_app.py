@@ -100,6 +100,12 @@ class UsersIntegrationTests(unittest.TestCase):
         review = get_review(1)
         assert review.experience == "Bad"
 
+    def test_update_review_rating(self):
+        create_review(816024126, 1, "This student was good!", 8)
+        update_review_rate(1, 5)
+        review = get_review(1)
+        assert review.rating == 5
+
 
     def test_review_toJSON(self):
         create_review(816024126, 1, "This student was good!", 8)
