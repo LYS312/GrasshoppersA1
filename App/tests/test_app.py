@@ -11,7 +11,10 @@ from App.controllers import (
     get_user,
     get_user_by_username,
     update_user,
-    create_review
+    create_review,
+    get_review,
+    update_review_exp,
+    update_review_rate
 )
 
 from wsgi import app
@@ -28,7 +31,7 @@ class UserUnitTests(unittest.TestCase):
         user = User("bob", "bobpass", "FST", "DCIT")
         assert user.username == "bob"
 
-    def test_toJSON(self):
+    def test_user_toJSON(self):
         user = User("bob", "bobpass", "FST", "DCIT")
         user_json = user.toJSON()
         self.assertDictEqual(user_json, {"id":None, "username":"bob", "faculty":"FST", "department":"DCIT"})
@@ -53,6 +56,7 @@ class UserUnitTests(unittest.TestCase):
     def test_new_review(self):
         review = Review(816024126, 1, "This student was good!", 8)
         assert review.studentID == 816024126
+
 
 '''
     Integration Tests
@@ -89,3 +93,22 @@ class UsersIntegrationTests(unittest.TestCase):
         update_user(1, "ronnie", "FST", "DCIT")
         user = get_user(1)
         assert user.username == "ronnie"
+
+    def test_update_review_exp(self):
+        create_review(816024126, 1, "This student was good!", 8)
+        update_review_exp(1, "Bad")
+        review = get_review(1)
+        assert review.experience == "Bad"
+
+
+    def test_review_toJSON(self):
+        create_review(816024126, 1, "This student was good!", 8)
+        review = get_review(1)
+        review_json = review.toJSON()
+        test_review_json = {
+            "experience":review_json["experience"],
+            "rating":review_json["rating"],
+            "studentID":review_json["studentID"],
+            "staffID":review_json["staffID"],
+        }
+        self.assertDictEqual(test_review_json, {"experience":"This student was good!", "rating":8, "studentID":816024126, "staffID":1})

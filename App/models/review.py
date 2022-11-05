@@ -13,10 +13,10 @@ class Review (db.Model):
 
 
     def __init__(self, studentID, staffID, experience, rating):
-        self.experience = experience
-        self.rating = rating
         self.studentID = studentID
         self.staffID = staffID
+        self.experience = experience
+        self.rating = rating
 
 
     def toJSON (self):
