@@ -11,7 +11,8 @@ from App.controllers import (
     upvote,
     remove_upvote,
     downvote,
-    remove_downvote
+    remove_downvote,
+    get_student
 )
 
 review_views = Blueprint('review_views', __name__, template_folder='../templates')
@@ -36,8 +37,12 @@ def static_reviews_page():
 @jwt_required()
 def new_review():
     data=request.get_json()
-    create_review(data["studentID"], data["staffID"], data["experience"], data["rating"])
-    return jsonify({"message":"Review Created"})
+    student=get_student(data["studentID"])
+    if student:
+        create_review(data["studentID"], data["staffID"], data["experience"], data["rating"])
+        return jsonify({"message":"Review Created"})
+    else:
+        return jsonify({"message":"Student not found"})
 
 @review_views.route('/updatereview/experience/<reviewid>', methods=['PUT'])
 @jwt_required()
