@@ -80,6 +80,7 @@ class UsersIntegrationTests(unittest.TestCase):
         self.assertListEqual([{"id":1, "username":"bob", "faculty":"FST", "department":"DCIT"}, {"id":2, "username":"rick", "faculty":"FSS", "department":"DOE"}], users_json)
 
     def test_update_user(self):
+        create_user("rick", "bobpass", "FSS", "DOE")
         update_user(1, "ronnie", "FST", "DCIT")
         user = get_user(1)
         assert user.username == "ronnie"
