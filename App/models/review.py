@@ -12,7 +12,7 @@ class Review (db.Model):
     staffID= db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
-    def __init__(self, experience, rating, studentID, staffID):
+    def __init__(self, studentID, staffID, experience, rating):
         self.experience = experience
         self.rating = rating
         self.studentID = studentID
