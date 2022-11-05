@@ -3,14 +3,15 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from App.main import create_app
 from App.database import create_db
-from App.models import User
+from App.models import User, Review
 from App.controllers import (
     create_user,
     get_all_users_json,
     authenticate,
     get_user,
     get_user_by_username,
-    update_user
+    update_user,
+    create_review
 )
 
 from wsgi import app
@@ -48,6 +49,10 @@ class UserUnitTests(unittest.TestCase):
         department = "DCIT"         #x
         user = User("bob", password, faculty, department)   #faculty and department were not here
         assert user.check_password(password)
+    
+    def test_new_review(self):
+        review = Review(816024126, 1, "This student was good!", 8)
+        assert review.studentID == 816024126
 
 '''
     Integration Tests
