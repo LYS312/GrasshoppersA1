@@ -110,10 +110,6 @@ app.cli.add_command(review_cli)
 
 
 
-
-#TEST COMMANDS
-
-
 '''
 Generic Commands
 '''
@@ -122,6 +118,7 @@ Generic Commands
 def initialize():
     create_db(app)
     print('database intialized')
+
 
 '''
 Test Commands
@@ -136,6 +133,16 @@ def user_tests_command(type):
         sys.exit(pytest.main(["-k", "UserUnitTests"]))
     elif type == "int":
         sys.exit(pytest.main(["-k", "UserIntegrationTests"]))
+    else:
+        sys.exit(pytest.main(["-k", "App"]))
+    
+@test.command("review", help="Run Review tests")
+@click.argument("type", default="all")
+def review_tests_command(type):
+    if type == "unit":
+        sys.exit(pytest.main(["-k", "ReviewUnitTests"]))
+    elif type == "int":
+        sys.exit(pytest.main(["-k", "ReviewsIntegrationTests"]))
     else:
         sys.exit(pytest.main(["-k", "App"]))
     

@@ -54,6 +54,8 @@ class UserUnitTests(unittest.TestCase):
         user = User("bob", password, faculty, department)   
         assert user.check_password(password)
     
+
+class ReviewUnitTests(unittest.TestCase):
     def test_new_review(self):
         review = Review(816024126, 1, "This student was good!", 8)
         assert (review.studentID, review.staffID, review.experience, review.rating)== (816024126, 1, "This student was good!", 8)
@@ -88,7 +90,7 @@ def test_authenticate():
     user = create_user("bob", "bobpass", "FST", "DCIT")
     assert authenticate("bob", "bobpass", "FST", "DCIT") != None
 
-class UsersIntegrationTests(unittest.TestCase):
+class UserIntegrationTests(unittest.TestCase):
 
     def test_create_user(self):
         user = create_user("rick", "bobpass", "FSS", "DOE")
@@ -98,7 +100,7 @@ class UsersIntegrationTests(unittest.TestCase):
 
     def test_get_all_users_json(self):
         users_json = get_all_users_json()
-        self.assertListEqual([{"id":1, "username":"bob", "faculty":"FST", "department":"DCIT"}, {"id":2, "username":"rick", "faculty":"FSS", "department":"DOE"}], users_json)
+        self.assertListEqual([{"id":1, "username":"rick", "faculty":"FSS", "department":"DOE"}], users_json)
 
     def test_update_user(self):
         create_user("rick", "bobpass", "FSS", "DOE")
@@ -106,6 +108,7 @@ class UsersIntegrationTests(unittest.TestCase):
         user = get_user(1)
         assert user.username == "ronnie"
 
+class ReviewsIntegrationTests(unittest.TestCase):
     def test_update_review_exp(self):
         create_review(816024126, 1, "This student was good!", 8)
         update_review_exp(1, "Bad")
