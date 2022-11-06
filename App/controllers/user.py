@@ -33,11 +33,12 @@ def get_all_users_json():
     users = [user.toJSON() for user in users]
     return users
 
-def update_user(id, faculty, department):
+def update_user(id, username, faculty, department):
     user = get_user(id)
     if user:
         user.faculty=faculty
         user.department=department
+        user.username=username
         db.session.add(user)
         db.session.commit()
     return user
