@@ -93,14 +93,14 @@ def test_authenticate():
 class UserIntegrationTests(unittest.TestCase):
 
     def test_create_user(self):
-        user = create_user("rick", "bobpass", "FSS", "DOE")
+        user = create_user("bobby", "bobpass", "FST", "DCIT")
         id=user.id
         test_user=get_user(id)
-        assert test_user.username == "rick"
+        assert test_user.username == "bobby"
 
     def test_get_all_users_json(self):
         users_json = get_all_users_json()
-        self.assertListEqual([{"id":1, "username":"rick", "faculty":"FSS", "department":"DOE"}], users_json)
+        self.assertListEqual([{"id":1, "username":"bobby", "faculty":"FST", "department":"DCIT"}], users_json)
 
     def test_update_user(self):
         create_user("rick", "bobpass", "FSS", "DOE")
